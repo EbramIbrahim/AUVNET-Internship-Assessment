@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "256570082100",
+    "project_id": "spotify-baae4",
+    "storage_bucket": "spotify-baae4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256570082100:android:1b75c48029389690eadb61",
+        "android_client_info": {
+          "package_name": "com.bafoor.spotify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxsetHRYsD-3oXxPMtqbu1LmRBKFxqTJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256570082100:android:3b0b1c173bdb715deadb61",
+        "android_client_info": {
+          "package_name": "com.example.nawel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxsetHRYsD-3oXxPMtqbu1LmRBKFxqTJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

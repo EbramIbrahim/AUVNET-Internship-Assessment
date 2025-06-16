@@ -4,23 +4,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/exception/exception_handeling.dart';
 import '../../../../core/services/firestore_services.dart';
 import '../../domain/remote_data_source/auth_remote_data_source.dart';
-import '../model/user_model.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FirestoreService _fireStore;
 
-  AuthRemoteDataSourceImpl({required FirestoreService firestore}) : _fireStore = firestore;
+  AuthRemoteDataSourceImpl({required FirestoreService firestore})
+    : _fireStore = firestore;
 
   CollectionReference get _userCollection =>
       _fireStore.firestore.collection("users");
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
-  Future<UserCredential> signUp({required UserModel user}) async {
+  Future<UserCredential> signUp({
+    required String email,
+    required String password,
+  }) async {
     return await executeTryAndCatchForDataLayer(() async {
       // Create the user account
       final userCredential = await _auth
-          .createUserWithEmailAndPassword(email: user.email, password: user.password)
+          .createUserWithEmailAndPassword(email: email, password: password)
           .timeout(const Duration(seconds: 60));
 
       if (userCredential.user == null) {

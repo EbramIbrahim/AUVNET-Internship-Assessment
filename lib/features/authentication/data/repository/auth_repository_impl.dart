@@ -1,11 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nawel/features/authentication/domain/remote_data_source/auth_remote_data_source.dart';
 import 'package:nawel/features/authentication/domain/repository/auth_repository.dart';
 
 import '../../../../core/exception/exception_handeling.dart';
 import '../../../../core/exception/faliure.dart';
-import '../model/user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
@@ -25,12 +23,22 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Faliure, UserCredential>> signUp({
-    required UserModel user,
+  Future<Either<Faliure, String>> signUp({
+    required String email,
+    required String password,
   }) async {
     return await executeTryAndCatchForRepository(() async {
-      final userCredential = await _authRemoteDataSource.signUp(user: user);
-      return userCredential;
+      await _authRemoteDataSource.signUp(email: email, password: password);
+      return "SignUp Successfully";
     });
+  }
+
+  @override
+  Future<Either<Faliure, bool>> checkUserAuthenticated() async {
+    return await executeTryAndCatchForRepository(() async {
+       final isAuthenticated = await _authRemoteDataSource.checkUserAuthenticated();
+      return isAuthenticated;
+    });
+
   }
 }

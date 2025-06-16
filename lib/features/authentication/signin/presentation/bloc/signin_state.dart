@@ -25,18 +25,3 @@ class SignInState extends Equatable {
   List<Object?> get props => [loginStatus];
 }
 
-// class SignInInitial extends SignInState {}
-//
-// class SignInSuccess extends SignInState {
-//   final String message;
-//
-//   const SignInSuccess(this.message);
-// }
-//
-// class SignInFailure extends SignInState {
-//   final String message;
-//
-//   const SignInFailure(this.message);
-// }
-//
-// class SignInLoading extends SignInState {}

@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/exception/faliure.dart';
-import '../../data/model/user_model.dart';
 
 abstract interface class AuthRepository {
 
@@ -11,8 +9,12 @@ abstract interface class AuthRepository {
     required String password,
   });
 
-  Future<Either<Faliure, UserCredential>> signUp({
-    required UserModel user
+  Future<Either<Faliure, String>> signUp({
+    required String email,
+    required String password,
   });
+
+  Future<Either<Faliure, bool>> checkUserAuthenticated();
+
 
 }

@@ -5,7 +5,8 @@ import '../../data/model/user_model.dart';
 abstract interface class AuthRemoteDataSource {
 
   Future<UserCredential> signUp({
-    required UserModel user
+    required String email,
+    required String password,
   });
 
   Future<UserCredential> signIn({

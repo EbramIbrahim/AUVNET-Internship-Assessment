@@ -4,29 +4,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nawel/core/assets/image_assets.dart';
+import 'package:nawel/core/routing/app_router.dart';
 import 'package:nawel/core/theme/app_color.dart';
 import 'package:nawel/core/widget/primary_button_widget.dart';
 import 'package:nawel/core/widget/primary_text_field_widget.dart';
-import 'package:nawel/features/authentication/signin/presentation/bloc/signin_bloc.dart';
-import 'package:nawel/features/authentication/signin/presentation/bloc/signin_event.dart';
-import 'package:nawel/features/authentication/signin/presentation/bloc/signin_state.dart';
+import 'package:nawel/features/authentication/signup/presentation/bloc/signup_event.dart';
+import 'package:nawel/features/authentication/signup/presentation/bloc/signup_state.dart';
 
 import '../../../../../core/helpers/validator.dart';
-import '../../../../../core/routing/app_router.dart';
 import '../../../../../core/widget/custom_animated_snackbar.dart';
 import '../../../../../core/widget/spacing_widget.dart';
+import '../bloc/signup_bloc.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignupScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignupScreen> {
   final formKey = GlobalKey<FormState>();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +47,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Image.asset(ImageAssets.logoImg),
                 ),
-                BlocConsumer<SignInBloc, SignInState>(
+                BlocConsumer<SignUpBloc, SignUpState>(
                   builder: (context, state) {
-                    if (state.loginStatus == LoginStatus.loading) {
+                    if (state.signUpStatus == SignUpStatus.loading) {
                       return Center(
                         child: CircularProgressIndicator(
                           color: AppColor.primaryColor,
@@ -66,29 +68,33 @@ class _SignInScreenState extends State<SignInScreen> {
                               return emailValidator(value);
                             },
                           ),
-                          heightSpacing(18.h),
+                          heightSpacing(7.h),
                           PrimaryTextFieldWidget(
                             preffixIcon: Image.asset(ImageAssets.passwordImg),
                             hintText: "password",
-                            isPassword: true,
                             controller: passwordController,
-                            // validator: (value) {
-                            //   return passwordValidator(value);
-                            // }
+                            isPassword: true,
+                          ),
+                          heightSpacing(7.h),
+                          PrimaryTextFieldWidget(
+                            preffixIcon: Image.asset(ImageAssets.passwordImg),
+                            hintText: "confirm password",
+                            controller: confirmPasswordController,
+                            isPassword: true,
                           ),
                         ],
                       ),
                     );
                   },
                   listener: (context, state) {
-                    if (state.loginStatus == LoginStatus.failure) {
+                    if (state.signUpStatus == SignUpStatus.failure) {
                       showAnimatedSnackDialog(
                         context,
                         message: state.errorMessage!,
                         type: AnimatedSnackBarType.error,
                       );
                     }
-                    if (state.loginStatus == LoginStatus.success) {
+                    if (state.signUpStatus == SignUpStatus.success) {
                       showAnimatedSnackDialog(
                         context,
                         message: state.data!,
@@ -101,25 +107,25 @@ class _SignInScreenState extends State<SignInScreen> {
                 PrimaryButtonWidget(
                   onPress: () {
                     if (formKey.currentState!.validate()) {
-                      context.read<SignInBloc>().add(
-                        SignInRequired(
+                      context.read<SignUpBloc>().add(
+                        SignUpRequired(
                           emailController.text,
                           passwordController.text,
                         ),
                       );
                     }
                   },
-                  buttonText: "Log in",
+                  buttonText: "Sign up",
                   width: 343.w,
                   fontSize: 14.sp,
                 ),
                 heightSpacing(16.h),
                 InkWell(
                   onTap: () {
-                    GoRouter.of(context).pushNamed(AppRouter.registerScreen);
+                    GoRouter.of(context).pushNamed(AppRouter.loginScreen);
                   },
                   child: Text(
-                    "Create an account",
+                    "have an account, Log In",
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,

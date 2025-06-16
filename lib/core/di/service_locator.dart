@@ -7,6 +7,8 @@ import 'package:nawel/features/authentication/domain/repository/auth_repository.
 import 'package:nawel/features/authentication/signin/presentation/bloc/signin_bloc.dart';
 
 import '../../features/authentication/data/remote_data_source/auth_remote_data_source_impl.dart';
+import '../../features/authentication/signup/presentation/bloc/signup_bloc.dart';
+import '../../features/authentication/splash/presentation/bloc/splash_bloc.dart';
 import '../services/firestore_services.dart';
 
 GetIt sl = GetIt.instance;
@@ -28,4 +30,6 @@ void setupServiceLocator() {
 
   // Bloc
   sl.registerFactory(() => SignInBloc(authRepository: sl()));
+  sl.registerFactory(() => SignUpBloc(authRepository: sl()));
+  sl.registerFactory(() => SplashBloc(authRepository: sl()));
 }

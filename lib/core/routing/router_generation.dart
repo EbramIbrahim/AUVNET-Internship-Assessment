@@ -5,6 +5,8 @@ import 'package:nawel/features/authentication/signin/presentation/bloc/signin_bl
 import 'package:nawel/features/authentication/signup/presentation/bloc/signup_bloc.dart';
 import 'package:nawel/features/authentication/signup/presentation/ui/signup_screen.dart';
 import 'package:nawel/features/authentication/splash/presentation/bloc/splash_bloc.dart';
+import 'package:nawel/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:nawel/features/onboarding/presentation/ui/onboarding_screen.dart';
 import '../../features/authentication/signin/presentation/ui/signin_screen.dart';
 import '../../features/authentication/splash/presentation/bloc/splash_event.dart';
 import '../../features/authentication/splash/presentation/ui/splash_screen.dart';
@@ -21,6 +23,15 @@ class RouterGeneration {
         builder: (context, state) => BlocProvider(
           create: (context) => sl<SplashBloc>()..add(CheckAuthentication()),
           child: SplashScreen(),
+        ),
+      ),
+
+      GoRoute(
+        path: AppRouter.onBoardingScreen,
+        name: AppRouter.onBoardingScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<OnboardingBloc>(),
+          child: OnboardingScreen(),
         ),
       ),
 

@@ -16,5 +16,8 @@ abstract interface class AuthRepository {
 
   Future<Either<Faliure, bool>> checkUserAuthenticated();
 
+  Future<Either<String, bool>> isFirstTime();
+
+
 
 }

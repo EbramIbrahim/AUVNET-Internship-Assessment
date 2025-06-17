@@ -9,11 +9,13 @@ class FirestoreService {
 
   FirebaseFirestore get firestore => _firestore;
 
-  Future<QuerySnapshot> getData(String collectionPath) async {
-    return await _firestore
+  Future<QuerySnapshot<Map<String, dynamic>>> getData(String collectionPath) async {
+    final map = await _firestore
         .collection(collectionPath)
         .get()
         .timeout(const Duration(seconds: 30));
+
+    return map;
   }
 
   Future<void> addData(String collectionPath, Map<String, dynamic> data) async {
@@ -46,4 +48,5 @@ class FirestoreService {
         .set(data, SetOptions(merge: true))
         .timeout(const Duration(seconds: 30));
   }
+
 }

@@ -13,6 +13,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   CollectionReference get _userCollection =>
       _fireStore.firestore.collection("users");
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -32,10 +33,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           code: 'user-not-found',
         );
       }
-
-      // Update display name
-      // await userCredential.user!.updateDisplayName(name);
-
       return userCredential;
     });
   }

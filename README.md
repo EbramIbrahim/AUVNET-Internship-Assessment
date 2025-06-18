@@ -1,16 +1,40 @@
-# nawel
+# 🛒 NAWEL E-commerce App  
+![Flutter](https://img.shields.io/badge/Flutter-3.19-blue)
+![Firebase](https://img.shields.io/badge/Firebase-Emulator-orange)
+![Bloc](https://img.shields.io/badge/State%20Management-Bloc-purple)
+*Clean Architecture • Firebase • Hive • Bloc*
 
-A new Flutter project.
+## Features ✨
+- 🔐 Firebase Authentication (Email/Password) & Cloud FireStore and Storage
+- 📰 Top Services & Favorit Restaurant
+- 📱 Adaptive UI for All Screen Sizes
+- 🌐 Real-time Products Updates via API
+- 📑 Caching for offline data
 
-## Getting Started
+## 🚀 Project Setup  
+### Prerequisites  
+- Flutter SDK
+- Hive
+- Bloc
+- equatable
+- get_it
+- Firebase account ([setup guide](https://firebase.google.com))  
 
-This project is a starting point for a Flutter application.
+### Installation  
+```bash
+git clone https://github.com/your-username/AUVNET-Flutter-Internship-Assessment.git
+cd AUVNET-Flutter-Internship-Assessment
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
 
-A few resources to get you started if this is your first Flutter project:
+### folder structur
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+lib/
+├── core/              # Shared theme/utils
+├── data/              # Firebase/Hive integrations
+├── domain/            # Business logic
+├── features/          # Feature modules (auth, cart, home)
+│   ├── auth/
+│   └── home/
+├── main.dart          # Entry point
+└── injection_container.dart # Dependency injection

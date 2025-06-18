@@ -18,14 +18,7 @@
 - Bloc
 - equatable
 - get_it
-- Firebase account ([setup guide](https://firebase.google.com))  
-
-### Installation  
-```bash
-git clone https://github.com/your-username/AUVNET-Flutter-Internship-Assessment.git
-cd AUVNET-Flutter-Internship-Assessment
-flutter pub get
-flutter pub run build_runner build --delete-conflicting-outputs
+- Firebase account ([setup guide](https://firebase.google.com))
 
 ### folder structur
 
@@ -38,3 +31,12 @@ lib/
 │   └── home/
 ├── main.dart          # Entry point
 └── injection_container.dart # Dependency injection
+
+### Installation  
+```bash
+git clone https://github.com/your-username/AUVNET-Flutter-Internship-Assessment.git
+cd AUVNET-Flutter-Internship-Assessment
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
+
+

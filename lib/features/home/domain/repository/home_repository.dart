@@ -1,17 +1,20 @@
 import 'package:dartz/dartz.dart';
+import 'package:hive/hive.dart';
 import 'package:nawel/features/home/data/model/promotions.dart';
 import 'package:nawel/features/home/data/model/restaurants.dart';
 import 'package:nawel/features/home/data/model/services.dart';
 import 'package:nawel/features/home/data/model/shortcuts.dart';
 
-import '../../../../core/exception/faliure.dart';
 
 abstract interface class HomeRepository {
-  Future<Either<Faliure, List<ServicesModel>>> fetchServices();
+  Future<Either<String, List<ServicesModel>>> fetchServices();
 
-  Future<Either<Faliure, List<ShortcutsModel>>> fetchShortcuts();
+  Future<Either<String, List<PromotionsModel>>> fetchPromotions();
 
-  Future<Either<Faliure, List<PromotionsModel>>> fetchPromotions();
+  Future<Either<String, List<RestaurantsModel>>> fetchRestaurants();
 
-  Future<Either<Faliure, List<RestaurantsModel>>> fetchRestaurants();
+  Future<Either<String, List<ShortcutsModel>>> fetchShortcuts();
+
+  Future<List<Either<String, List<HiveObject>>>> loadAllData();
+
 }

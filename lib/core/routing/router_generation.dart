@@ -57,7 +57,7 @@ class RouterGeneration {
         path: AppRouter.homeScreen,
         name: AppRouter.homeScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) => sl<HomeBloc>()..add(HomeFeaturesEvent()),
+          create: (context) => sl<HomeBloc>()..add(LoadServicesEvent()),
           child: HomeScreen(),
         ),
       ),

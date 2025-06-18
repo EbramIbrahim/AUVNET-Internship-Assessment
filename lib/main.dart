@@ -2,14 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nawel/core/routing/router_generation.dart';
+import 'package:nawel/features/home/data/local_service/home_local_data_source_impl.dart';
 
 import 'core/di/service_locator.dart';
 import 'core/services/hive_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await HiveService().init();
+  await HomeLocalDataSourceImpl().initDataBase();
   setupServiceLocator();
-  await HiveService.init();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }

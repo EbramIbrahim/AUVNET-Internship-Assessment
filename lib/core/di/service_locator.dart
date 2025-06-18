@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:nawel/core/helpers/connection_helper.dart';
 import 'package:nawel/core/services/hive_services.dart';
 import 'package:nawel/features/authentication/data/repository/auth_repository_impl.dart';
 import 'package:nawel/features/authentication/domain/remote_data_source/auth_remote_data_source.dart';
 import 'package:nawel/features/authentication/domain/repository/auth_repository.dart';
 import 'package:nawel/features/authentication/signin/presentation/bloc/signin_bloc.dart';
+import 'package:nawel/features/home/data/local_service/home_local_data_source_impl.dart';
 import 'package:nawel/features/home/data/repository/home_repository_impl.dart';
 import 'package:nawel/features/home/domain/remote_service/home_remote_services.dart';
 import 'package:nawel/features/home/domain/repository/home_repository.dart';
@@ -22,9 +24,10 @@ import '../services/firestore_services.dart';
 
 GetIt sl = GetIt.instance;
 
-void setupServiceLocator() {
+void setupServiceLocator() async {
   sl.registerLazySingleton(() => FirebaseAuth.instance);
   sl.registerLazySingleton(() => FirebaseFirestore.instance);
+  sl.registerLazySingleton(() => InternetConnectionHelper());
 
   // remote data source
   sl.registerLazySingleton(() => FirestoreService());
@@ -36,6 +39,12 @@ void setupServiceLocator() {
     () => HomeRemoteDataSourceImpl(firebaseFirestore: sl()),
   );
 
+  // local data source
+  sl.registerLazySingleton<HomeLocalDataSourceImpl>(
+          () => HomeLocalDataSourceImpl()
+  );
+
+
   // repos
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(authDataSource: sl(), hiveService: sl()),
@@ -44,7 +53,11 @@ void setupServiceLocator() {
     () => OnboardingRepositoryImpl(hiveService: sl()),
   );
   sl.registerLazySingleton<HomeRepository>(
-    () => HomeRepositoryImpl(homeRemoteService: sl()),
+    () => HomeRepositoryImpl(
+      homeRemoteService: sl(),
+      homeLocalDataSourceImpl: sl(),
+      connectionHelper: sl(),
+    ),
   );
 
   // Bloc
@@ -53,4 +66,6 @@ void setupServiceLocator() {
   sl.registerFactory(() => SplashBloc(authRepository: sl()));
   sl.registerFactory(() => OnboardingBloc(onboardingRepository: sl()));
   sl.registerFactory(() => HomeBloc(homeRepository: sl()));
+
+
 }

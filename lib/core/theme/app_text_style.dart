@@ -9,6 +9,14 @@ class AppStyles {
     color: AppColor.blackColor,
   );
 
+
+  static TextStyle commonBoldBlackTextStyle = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColor.blackColor,
+  );
+
+
   static TextStyle secondaryTextStyle = TextStyle(
     fontSize: 32.sp,
     fontWeight: FontWeight.normal,

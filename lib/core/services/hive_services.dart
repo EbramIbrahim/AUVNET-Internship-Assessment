@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 class HiveService {
   static const String _boxName = 'onboarding_box';
@@ -8,16 +9,16 @@ class HiveService {
   static Box<bool>? _box;
 
   // Initialize the onboarding service
-  static Future<void> init() async {
-    await Hive.initFlutter();
+  Future<void> init() async {
+    final appDocumentDirectory =
+        await path_provider.getApplicationDocumentsDirectory();
+    await Hive.initFlutter(appDocumentDirectory.path);
     _box = await Hive.openBox<bool>(_boxName);
   }
 
   bool get isFirstTime {
     if (_box == null) {
-      throw Exception(
-        'Hive not initialized. Call Hive.init() first.',
-      );
+      throw Exception('Hive not initialized. Call Hive.init() first.');
     }
     // If the key doesn't exist, it means it's the first time
     return _box!.get(_isFirstTimeKey, defaultValue: true) ?? true;

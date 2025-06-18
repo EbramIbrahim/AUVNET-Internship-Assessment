@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:hive/hive.dart';
 import 'package:nawel/core/helpers/connection_helper.dart';
 import 'package:nawel/features/home/data/local_service/home_local_data_source_impl.dart';
 import 'package:nawel/features/home/data/model/promotions.dart';
@@ -31,9 +30,11 @@ class HomeRepositoryImpl implements HomeRepository {
         await _homeLocalDataSourceImpl.isDataAvailable();
     final bool isInternetConnected =
         await _connectionHelper.checkInternetConnection();
+    log("is Data Empty:$isDataBaseEmpty");
 
     if (isInternetConnected) {
       try {
+        await _homeLocalDataSourceImpl.clearRestaurantsModel();
         final result = await _homeRemoteService.fetchRestaurants();
         List<RestaurantsModel> remoteRestaurant = [];
         for (var element in result) {
@@ -49,7 +50,7 @@ class HomeRepositoryImpl implements HomeRepository {
         return Right(localRestaurant);
       } catch (e) {
         if (!isDataBaseEmpty) {
-          final List<RestaurantsModel> localRestaurant =
+           List<RestaurantsModel> localRestaurant =
               await _homeLocalDataSourceImpl.getRestaurants();
 
           return Right(localRestaurant);
@@ -59,7 +60,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     } else {
       if (!isDataBaseEmpty) {
-        final List<RestaurantsModel> localRestaurant =
+         List<RestaurantsModel> localRestaurant =
             await _homeLocalDataSourceImpl.getRestaurants();
 
         return Right(localRestaurant);
@@ -75,9 +76,11 @@ class HomeRepositoryImpl implements HomeRepository {
         await _homeLocalDataSourceImpl.isDataAvailable();
     final bool isInternetConnected =
         await _connectionHelper.checkInternetConnection();
+    log("is Data Empty:$isDataBaseEmpty");
 
     if (isInternetConnected) {
       try {
+        await _homeLocalDataSourceImpl.clearPromotionModel();
         final result = await _homeRemoteService.fetchPromotions();
         List<PromotionsModel> promotions = [];
         for (var element in result) {
@@ -91,7 +94,7 @@ class HomeRepositoryImpl implements HomeRepository {
         return Right(localPromotions);
       } catch (e) {
         if (!isDataBaseEmpty) {
-          final List<PromotionsModel> localPromotions =
+           List<PromotionsModel> localPromotions =
               await _homeLocalDataSourceImpl.getPromotions();
 
           return Right(localPromotions);
@@ -101,7 +104,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     } else {
       if (!isDataBaseEmpty) {
-        final List<PromotionsModel> localPromotions =
+         List<PromotionsModel> localPromotions =
             await _homeLocalDataSourceImpl.getPromotions();
 
         return Right(localPromotions);
@@ -117,9 +120,11 @@ class HomeRepositoryImpl implements HomeRepository {
         await _homeLocalDataSourceImpl.isDataAvailable();
     final bool isInternetConnected =
         await _connectionHelper.checkInternetConnection();
+    log("is Data Empty:$isDataBaseEmpty");
 
     if (isInternetConnected) {
       try {
+        await _homeLocalDataSourceImpl.clearServicesModel();
         final result = await _homeRemoteService.fetchServices();
         List<ServicesModel> remoteServices = [];
         for (var element in result) {
@@ -133,7 +138,7 @@ class HomeRepositoryImpl implements HomeRepository {
         return Right(localServices);
       } catch (e) {
         if (!isDataBaseEmpty) {
-          final List<ServicesModel> localServices =
+           List<ServicesModel> localServices =
               await _homeLocalDataSourceImpl.getServices();
 
           return Right(localServices);
@@ -143,7 +148,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     } else {
       if (!isDataBaseEmpty) {
-        final List<ServicesModel> localServices =
+         List<ServicesModel> localServices =
             await _homeLocalDataSourceImpl.getServices();
 
         return Right(localServices);
@@ -159,9 +164,11 @@ class HomeRepositoryImpl implements HomeRepository {
         await _homeLocalDataSourceImpl.isDataAvailable();
     final bool isInternetConnected =
         await _connectionHelper.checkInternetConnection();
+    log("is Data Empty:$isDataBaseEmpty");
 
     if (isInternetConnected) {
       try {
+        await _homeLocalDataSourceImpl.clearShortcutsModel();
         final result = await _homeRemoteService.fetchShortcuts();
         List<ShortcutsModel> shortcuts = [];
         for (var element in result) {
@@ -176,7 +183,7 @@ class HomeRepositoryImpl implements HomeRepository {
       } catch (e) {
         if (!isDataBaseEmpty) {
           log('Load [shortcuts] from Local DataBase');
-          final List<ShortcutsModel> localShortcuts =
+           List<ShortcutsModel> localShortcuts =
               await _homeLocalDataSourceImpl.getShortcuts();
           log("local shortcuts ${localShortcuts.toString()}");
 
@@ -188,7 +195,7 @@ class HomeRepositoryImpl implements HomeRepository {
     } else {
       if (!isDataBaseEmpty) {
         log('Load [shortcuts] from Local DataBase');
-        final List<ShortcutsModel> localShortcuts =
+         List<ShortcutsModel> localShortcuts =
             await _homeLocalDataSourceImpl.getShortcuts();
         log("local shortcuts ${localShortcuts.toString()}");
 
@@ -199,14 +206,4 @@ class HomeRepositoryImpl implements HomeRepository {
     }
   }
 
-  @override
-  Future<List<Either<String, List<HiveObject>>>> loadAllData() async {
-    final result = await Future.wait([
-      fetchServices(),
-      fetchShortcuts(),
-      fetchPromotions(),
-      fetchRestaurants(),
-    ]);
-    return result;
-  }
 }

@@ -4,6 +4,7 @@ import 'package:nawel/features/home/data/model/restaurants.dart';
 import 'package:nawel/features/home/data/model/services.dart';
 import 'package:nawel/features/home/data/model/shortcuts.dart';
 
+
 enum HomeStatus { initial, loading, success, failure }
 
 class HomeState extends Equatable {
@@ -42,5 +43,11 @@ class HomeState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [homeStatus];
+  List<Object?> get props => [
+    homeStatus,
+    servicesModel,
+    shortcutsModel,
+    promotionsModel,
+    restaurantsModel,
+  ];
 }

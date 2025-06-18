@@ -10,9 +10,7 @@ class HiveService {
 
   // Initialize the onboarding service
   Future<void> init() async {
-    final appDocumentDirectory =
-        await path_provider.getApplicationDocumentsDirectory();
-    await Hive.initFlutter(appDocumentDirectory.path);
+    await Hive.initFlutter();
     _box = await Hive.openBox<bool>(_boxName);
   }
 

@@ -72,9 +72,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             hintText: "password",
                             isPassword: true,
                             controller: passwordController,
-                            // validator: (value) {
-                            //   return passwordValidator(value);
-                            // }
+                            validator: (value) {
+                              return passwordValidator(value);
+                            }
                           ),
                         ],
                       ),
@@ -94,6 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         message: state.data!,
                         type: AnimatedSnackBarType.success,
                       );
+                      GoRouter.of(context).pushReplacementNamed(AppRouter.homeScreen);
                     }
                   },
                 ),

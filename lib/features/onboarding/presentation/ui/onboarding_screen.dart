@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nawel/core/assets/image_assets.dart';
 import 'package:nawel/core/routing/app_router.dart';
 import 'package:nawel/core/theme/app_color.dart';
 import 'package:nawel/core/theme/app_text_style.dart';
@@ -50,7 +51,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             );
             GoRouter.of(
               context,
-            ).pushReplacementNamed(AppRouter.homeScreen);
+            ).pushReplacementNamed(AppRouter.loginScreen);
           }
         },
         child: Column(
@@ -85,51 +86,44 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            heightSpacing(52),
+            heightSpacing(38),
             Expanded(
               child: Stack(
-                children: [
-                  // Container(
-                  //   width: 216,
-                  //   decoration: BoxDecoration(
-                  //     gradient: LinearGradient(
-                  //       begin: Alignment.bottomRight,
-                  //       colors: [
-                  //          AppColor.lightGreen,
-                  //         AppColor.lightGreen.withValues(alpha: 0.3),
-                  //
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      PrimaryButtonWidget(
-                        onPress: () {
-                          context.read<OnboardingBloc>().add(
-                            CompleteOnboarding(),
-                          );
-                        },
-                        buttonText: "Get Started",
-                      ),
-                      heightSpacing(14),
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            currentIndex != onboardingItems.length - 1
-                                ? currentIndex++
-                                : null;
-                          });
-                        },
-                        child: onboardingText(
-                          "next",
-                          AppStyles.secondaryTextStyle.copyWith(fontSize: 14.sp),
+                children:[Container(
+                  alignment: Alignment.topRight,
+                  decoration: BoxDecoration(
+                  ), child: Image.asset(ImageAssets.bgImg,)
+                ),
+                  Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        PrimaryButtonWidget(
+                          onPress: () {
+                            context.read<OnboardingBloc>().add(
+                              CompleteOnboarding(),
+                            );
+                          },
+                          buttonText: "Get Started",
                         ),
-                      ),
-                    ],
+                        heightSpacing(14),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              currentIndex != onboardingItems.length - 1
+                                  ? currentIndex++
+                                  : null;
+                            });
+                          },
+                          child: onboardingText(
+                            "next",
+                            AppStyles.secondaryTextStyle.copyWith(fontSize: 14.sp),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+              ]
               ),
             ),
           ],

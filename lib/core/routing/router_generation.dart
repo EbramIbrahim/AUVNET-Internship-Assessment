@@ -17,7 +17,7 @@ import 'app_router.dart';
 
 class RouterGeneration {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRouter.homeScreen,
+    initialLocation: AppRouter.splashScreen,
     routes: [
       GoRoute(
         path: AppRouter.splashScreen,
@@ -57,7 +57,7 @@ class RouterGeneration {
         path: AppRouter.homeScreen,
         name: AppRouter.homeScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) => sl<HomeBloc>()..add(LoadServicesEvent()),
+          create: (context) => sl<HomeBloc>()..add(HomeFeaturesEvent()),
           child: HomeScreen(),
         ),
       ),

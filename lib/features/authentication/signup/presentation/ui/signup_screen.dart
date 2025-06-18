@@ -81,6 +81,9 @@ class _SignUpScreenState extends State<SignupScreen> {
                             hintText: "confirm password",
                             controller: confirmPasswordController,
                             isPassword: true,
+                              validator: (value) {
+                                return passwordValidator(value);
+                              }
                           ),
                         ],
                       ),
@@ -100,6 +103,7 @@ class _SignUpScreenState extends State<SignupScreen> {
                         message: state.data!,
                         type: AnimatedSnackBarType.success,
                       );
+                      GoRouter.of(context).pushReplacementNamed(AppRouter.homeScreen);
                     }
                   },
                 ),

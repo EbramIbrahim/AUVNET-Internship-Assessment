@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nawel/features/home/data/model/promotions.dart';
 
+import '../../../../core/assets/image_assets.dart';
 import '../../../../core/theme/app_color.dart';
 
 Widget sliderRestaurantItem(
@@ -26,7 +27,10 @@ height: 180.h,
           ),
 
         items: promotions.map((restaurant) {
-          return CachedNetworkImage(imageUrl: restaurant.image ?? "https://archive.org/download/placeholder-image/placeholder-image.jpg");
+          return CachedNetworkImage(
+              imageUrl: restaurant.image.toString(),
+            errorWidget: (context, url, error) => Image.asset(ImageAssets.placeholderImg),
+          );
         }).toList(),
       ),
       DotsIndicator(

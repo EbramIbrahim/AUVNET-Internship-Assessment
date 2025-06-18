@@ -57,7 +57,7 @@ class PrimaryTextFieldWidget extends StatelessWidget {
             borderSide: BorderSide(color: Colors.red, width: 1),
           ),
           filled: true,
-          fillColor: AppColor.textFieldFill,
+          fillColor: AppColor.lightGrayColor,
           suffixIcon: suffixIcon,
           prefixIcon: preffixIcon,
         ),

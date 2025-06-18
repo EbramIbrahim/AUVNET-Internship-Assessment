@@ -88,9 +88,31 @@ class HomeLocalDataSourceImpl {
     return box.values.toList();
   }
 
+
+  // clear mehtods
+  Future<void> clearServicesModel() async {
+    final servicesBox = Hive.box<ServicesModel>(_servicesKey);
+    await servicesBox.clear();
+  }
+
+  Future<void> clearShortcutsModel() async {
+    final shortcutsBox = Hive.box<ShortcutsModel>(_shortcutKey);
+    await shortcutsBox.clear();
+  }
+
+  Future<void> clearPromotionModel() async {
+    final promotionBox = Hive.box<PromotionsModel>(_promotionKey);
+    await promotionBox.clear();
+  }
+
+  Future<void> clearRestaurantsModel() async {
+    final restaurantsBox = Hive.box<RestaurantsModel>(_restaurantKey);
+    await restaurantsBox.clear();
+  }
+
   Future<bool> isDataAvailable() async {
     try {
-      return _shortcutBox!.isEmpty;
+      return _servicesBox!.isEmpty;
     } catch (e) {
       // Handle error checking box emptiness
       log('Error checking if box is empty: $e');

@@ -15,6 +15,4 @@ abstract interface class HomeRepository {
 
   Future<Either<String, List<ShortcutsModel>>> fetchShortcuts();
 
-  Future<List<Either<String, List<HiveObject>>>> loadAllData();
-
 }

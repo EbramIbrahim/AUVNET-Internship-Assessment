@@ -21,7 +21,6 @@
 - Firebase account ([setup guide](https://firebase.google.com))
 
 ### folder structur
-
 lib/
 ├── core/              # Shared theme/utils
 ├── data/              # Firebase/Hive integrations
@@ -31,6 +30,7 @@ lib/
 │   └── home/
 ├── main.dart          # Entry point
 └── injection_container.dart # Dependency injection
+
 
 ### Installation  
 ```bash

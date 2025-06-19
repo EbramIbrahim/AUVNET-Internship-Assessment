@@ -7,9 +7,11 @@
 ## Features ✨
 - 🔐 Firebase Authentication (Email/Password) & Cloud FireStore and Storage
 - 📰 Top Services & Favorit Restaurant
-- 📱 Adaptive UI for All Screen Sizes
-- 🌐 Real-time Products Updates via API
+- 📱  Adaptive UI for All Screen Sizes
+- 🌐 Real-time Products Updates via FireStore
 - 📑 Caching for offline data
+- 📰 Custom Error Screen to handle No data and No internet
+- 📱 pull to refresh to reload data  
 
 ## 🚀 Project Setup  
 ### Prerequisites  

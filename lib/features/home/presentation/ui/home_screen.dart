@@ -38,12 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state.homeStatus == HomeStatus.failure) {
-            return ErrorItemWidget(
-              isForNetwork: true,
-              description: state.errorMessage ?? "Something went wrong!",
-              onRetry: () {
-                context.read<HomeBloc>().add(HomeFeaturesEvent());
-              },
+            return Center(
+              child: ErrorItemWidget(
+                isForNetwork: true,
+                description: state.errorMessage ?? "Something went wrong!",
+                onRetry: () {
+                  context.read<HomeBloc>().add(HomeFeaturesEvent());
+                },
+              ),
             );
           }
           if (state.homeStatus == HomeStatus.loading) {

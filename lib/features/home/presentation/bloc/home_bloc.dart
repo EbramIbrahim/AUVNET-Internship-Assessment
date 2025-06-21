@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:nawel/core/exception/faliure.dart';
 import 'package:nawel/features/home/data/model/promotions.dart';
 import 'package:nawel/features/home/data/model/restaurants.dart';
 import 'package:nawel/features/home/data/model/services.dart';
@@ -35,11 +34,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final failures =
           [servicesEither, shortcutsEither, promotionsEither, restaurantsEither]
               .map((either) => either.fold((failure) => failure, (_) => null))
-              .whereType<Faliure>()
+              .whereType<String>()
               .toList();
 
       if (failures.isNotEmpty) {
-        final errorMessage = failures.map((f) => f.erorr).join('\n');
+        final errorMessage = failures.map((f) => f).join('\n');
         emit(
           state.copyWith(
             homeStatus: HomeStatus.failure,
@@ -68,16 +67,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         (restaurantsList) => restaurantsList,
       );
 
+      if(
+      services.isNotEmpty &&
+      shortcuts.isNotEmpty &&
+      promotions.isNotEmpty &&
+      restaurants.isNotEmpty
+      ) {
+        emit(
+          state.copyWith(
+            homeStatus: HomeStatus.success,
+            servicesModel: services,
+            shortcutsModel: shortcuts,
+            promotionsModel: promotions,
+            restaurantsModel: restaurants,
+          ),
+        );
+      }
 
-      emit(
-        state.copyWith(
-          homeStatus: HomeStatus.success,
-          servicesModel: services,
-          shortcutsModel: shortcuts,
-          promotionsModel: promotions,
-          restaurantsModel: restaurants,
-        ),
-      );
 
     log(state.homeStatus.toString());
   }

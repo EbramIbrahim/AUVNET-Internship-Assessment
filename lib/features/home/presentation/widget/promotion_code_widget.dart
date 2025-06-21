@@ -37,6 +37,7 @@ Widget promotionCodeWidget() {
               alignment: Alignment.center,
               children: [
                 CachedNetworkImage(
+                    errorWidget: (context, url, error) => Image.asset(ImageAssets.placeholderImg),
                     imageUrl: "https://firebasestorage.googleapis.com/v0/b/spotify-baae4.appspot.com/o/shortcuts%2Fsuper_saver.png?alt=media&token=fa79f06d-74ae-4f79-aadf-ba6920f47fb5"),
                 Image.asset(ImageAssets.nImg)
               ],

@@ -50,7 +50,7 @@ class HomeRepositoryImpl implements HomeRepository {
         return Right(localRestaurant);
       } catch (e) {
         if (!isDataBaseEmpty) {
-           List<RestaurantsModel> localRestaurant =
+          List<RestaurantsModel> localRestaurant =
               await _homeLocalDataSourceImpl.getRestaurants();
 
           return Right(localRestaurant);
@@ -60,7 +60,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     } else {
       if (!isDataBaseEmpty) {
-         List<RestaurantsModel> localRestaurant =
+        List<RestaurantsModel> localRestaurant =
             await _homeLocalDataSourceImpl.getRestaurants();
 
         return Right(localRestaurant);
@@ -94,7 +94,7 @@ class HomeRepositoryImpl implements HomeRepository {
         return Right(localPromotions);
       } catch (e) {
         if (!isDataBaseEmpty) {
-           List<PromotionsModel> localPromotions =
+          List<PromotionsModel> localPromotions =
               await _homeLocalDataSourceImpl.getPromotions();
 
           return Right(localPromotions);
@@ -104,7 +104,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     } else {
       if (!isDataBaseEmpty) {
-         List<PromotionsModel> localPromotions =
+        List<PromotionsModel> localPromotions =
             await _homeLocalDataSourceImpl.getPromotions();
 
         return Right(localPromotions);
@@ -138,7 +138,7 @@ class HomeRepositoryImpl implements HomeRepository {
         return Right(localServices);
       } catch (e) {
         if (!isDataBaseEmpty) {
-           List<ServicesModel> localServices =
+          List<ServicesModel> localServices =
               await _homeLocalDataSourceImpl.getServices();
 
           return Right(localServices);
@@ -148,7 +148,7 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     } else {
       if (!isDataBaseEmpty) {
-         List<ServicesModel> localServices =
+        List<ServicesModel> localServices =
             await _homeLocalDataSourceImpl.getServices();
 
         return Right(localServices);
@@ -183,7 +183,7 @@ class HomeRepositoryImpl implements HomeRepository {
       } catch (e) {
         if (!isDataBaseEmpty) {
           log('Load [shortcuts] from Local DataBase');
-           List<ShortcutsModel> localShortcuts =
+          List<ShortcutsModel> localShortcuts =
               await _homeLocalDataSourceImpl.getShortcuts();
           log("local shortcuts ${localShortcuts.toString()}");
 
@@ -195,7 +195,7 @@ class HomeRepositoryImpl implements HomeRepository {
     } else {
       if (!isDataBaseEmpty) {
         log('Load [shortcuts] from Local DataBase');
-         List<ShortcutsModel> localShortcuts =
+        List<ShortcutsModel> localShortcuts =
             await _homeLocalDataSourceImpl.getShortcuts();
         log("local shortcuts ${localShortcuts.toString()}");
 
@@ -205,5 +205,4 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     }
   }
-
 }

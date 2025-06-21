@@ -17,7 +17,7 @@ import 'app_router.dart';
 
 class RouterGeneration {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRouter.splashScreen,
+    initialLocation: AppRouter.homeScreen,
     routes: [
       GoRoute(
         path: AppRouter.splashScreen,
